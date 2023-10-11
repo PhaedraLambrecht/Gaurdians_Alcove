@@ -50,7 +50,7 @@ public class MovementBehaviour : MonoBehaviour
     protected virtual void Update()
     {
         HandleRotation();
-        //HandleLookAt();
+        HandleLookAt();
     }
 
     protected virtual void FixedUpdate()

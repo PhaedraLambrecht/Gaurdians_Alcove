@@ -354,6 +354,7 @@ GameObject:
   - component: {fileID: -8822784354161557668}
   - component: {fileID: 5262693964745707948}
   - component: {fileID: 8914770067744951156}
+  - component: {fileID: 3244545249224235723}
   m_Layer: 6
   m_Name: Player
   m_TagString: Friendly
@@ -488,7 +489,7 @@ MonoBehaviour:
   _shoulderObject: {fileID: 1072125502403316871}
   _movementSpeed: 8
   _rotationSpeed: 90
-  _jumpStrength: 5
+  _jumpStrength: 15
   _camera: {fileID: 0}
 --- !u!114 &8914770067744951156
 MonoBehaviour:
@@ -505,6 +506,25 @@ MonoBehaviour:
   _shieldTemplate: {fileID: 7818876783969232098, guid: 8545c27bb13e4794c9d1836833db00ab,
     type: 3}
   _socket: {fileID: 4960522858323277467}
+--- !u!114 &3244545249224235723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4960522858323277467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &8462820703556405304
 GameObject:
   m_ObjectHideFlags: 0

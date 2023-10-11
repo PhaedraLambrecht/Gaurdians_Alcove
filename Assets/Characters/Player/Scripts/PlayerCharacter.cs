@@ -50,7 +50,6 @@ public class PlayerCharacter : BasicCharacter
         HandleMovementInput();
         HandleAttackInput();
         HandleAShieldInput();
-       // HandleAimingInput();
     }
     void HandleMovementInput()
     {
@@ -68,16 +67,6 @@ public class PlayerCharacter : BasicCharacter
         _movementBehaviour.DesiredRotationDirection = movement;
     }
 
-    private void HandleAimingInput()
-    {
-        Vector3 mousePosition = Mouse.current.position.ReadValue();
-        mousePosition.z = Mathf.Abs(transform.position.z - Camera.main.transform.position.z); // the mouse position represents a line, the z coordinate represents the distance from the camera we pick a point on this line
-       
-        Vector3 worldMousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        worldMousePosition.z = 0; //or game takes place in xy plane, so remove z position
-      
-        _movementBehaviour.DesiredLookAtDirection = worldMousePosition;
-    }
 
     private void HandleJumpInput(InputAction.CallbackContext context)
     {
