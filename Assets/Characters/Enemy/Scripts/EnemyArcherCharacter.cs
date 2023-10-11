@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class EnemyArcherCharacter : BasicCharacter
+public class EnemyArcherCharacter : BasicCharacter 
 {
-    private GameObject _playerTarget = null;
-    [SerializeField] private float _attackRange = 10.0f;
+    protected GameObject _playerTarget = null;
+    [SerializeField] protected float _attackRange = 10.0f;
 
-
-    private void Start()
+    protected void Start()
     {
         //expensive method, use with caution
         PlayerCharacter player = FindObjectOfType<PlayerCharacter>();
@@ -23,15 +22,15 @@ public class EnemyArcherCharacter : BasicCharacter
         HandleAttacking();
     }
 
-    void HandleMovement()
+    private void HandleMovement()
     {
         if (_movementBehaviour == null)
             return;
+  
 
         _movementBehaviour.DesiredLookAtDirection = _playerTarget.transform.position;
 
-        if( (transform.position - _playerTarget.transform.position).sqrMagnitude
-            > _attackRange)
+        if ((transform.position - _playerTarget.transform.position).sqrMagnitude > _attackRange * _attackRange)
         {
             _movementBehaviour.Target = _playerTarget;
         }
@@ -39,13 +38,10 @@ public class EnemyArcherCharacter : BasicCharacter
         {
             _movementBehaviour.Target = null;
         }
-     
 
     }
 
-
-
-    void HandleAttacking()
+    private void HandleAttacking()
     {
         if (_attackBehaviour == null)
             return;
@@ -55,11 +51,7 @@ public class EnemyArcherCharacter : BasicCharacter
 
         //if we are in range of the player, fire our weapon, 
         //use sqr magnitude when comparing ranges as it is more efficient
-        _attackBehaviour.Attack();
-    }
-
-    void Kill()
-    {
-        Destroy(gameObject);
+        if ((transform.position - _playerTarget.transform.position).sqrMagnitude > _attackRange * _attackRange)
+            _attackBehaviour.Attack();
     }
 }
