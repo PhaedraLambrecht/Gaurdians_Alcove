@@ -3,48 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class EnemyArcherCharacter : BasicCharacter 
+// Will always target the player
+public class EnemyArcherCharacter : BasicEnemy
 {
     protected GameObject _playerTarget = null;
-    [SerializeField] protected float _attackRange = 10.0f;
 
     protected void Start()
     {
         //expensive method, use with caution
         PlayerCharacter player = FindObjectOfType<PlayerCharacter>();
-
         if (player) _playerTarget = player.gameObject;
     }
 
-    private void Update()
+    protected override void Update()
     {
-        HandleMovement();
-        HandleAttacking();
+        base.Update();
     }
 
-    private void HandleMovement()
+
+    protected override void HandleMovement()
     {
-        if (_movementBehaviour == null)
-            return;
-  
+        base.HandleMovement();
 
         _movementBehaviour.DesiredLookAtDirection = _playerTarget.transform.position;
-
-        if ((transform.position - _playerTarget.transform.position).sqrMagnitude > _attackRange * _attackRange)
-        {
-            _movementBehaviour.Target = _playerTarget;
-        }
-        else
-        {
-            _movementBehaviour.Target = null;
-        }
-
+        _movementBehaviour.Target = _playerTarget;
     }
 
-    private void HandleAttacking()
+    protected override void HandleAttacking()
     {
-        if (_attackBehaviour == null)
-            return;
+        base.HandleAttacking();
 
         if (_playerTarget == null)
             return;
@@ -52,6 +39,9 @@ public class EnemyArcherCharacter : BasicCharacter
         //if we are in range of the player, fire our weapon, 
         //use sqr magnitude when comparing ranges as it is more efficient
         if ((transform.position - _playerTarget.transform.position).sqrMagnitude > _attackRange * _attackRange)
+        {
+            _hasAttacked = true;
             _attackBehaviour.Attack();
+        }
     }
 }

@@ -49,7 +49,7 @@ public class BasicProjectile : MonoBehaviour
     const string ARTIFACT_TAG = "Artifact";
     void OnTriggerEnter(Collider other)
     {
-        //make sure we only hit friendly or enemies
+        //make sure we only hit friendly or enemies or the artifact
         if (other.tag != FRIENDLY_TAG && other.tag != ENEMY_TAG && other.tag != ARTIFACT_TAG)
             return;
 

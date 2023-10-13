@@ -456,7 +456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0757e9cf786377d44b960e91420f0e46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gunTemplate: {fileID: 784776365572540511, guid: 4c5c998569dd8874690bd36569f4ceff,
+  _gunTemplate: {fileID: 6466811304662774437, guid: ff5a8abce94eeeb49be18138e171c7f0,
     type: 3}
   _socket: {fileID: 8462820703556405304}
 --- !u!114 &-8822784354161557668

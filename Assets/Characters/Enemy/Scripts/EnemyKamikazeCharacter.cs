@@ -2,43 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyKamikazeCharacter : BasicCharacter
+public class EnemyKamikazeCharacter : BasicEnemy
 {
     protected GameObject _artifactTarget = null;
-    [SerializeField] protected float _attackRange = 10.0f;
     [SerializeField] GameObject _AttackVFXTemplate = null;
-
-    private bool _hasAttacked = false;
 
     private void Start()
     {
         //expensive method, use with caution
         BasicArtifact artifact = FindObjectOfType<BasicArtifact>();
-
         if (artifact) _artifactTarget = artifact.gameObject;
     }
 
-    private void Update()
+    protected override void Update()
     {
-        HandleMovement();
-        HandleAttacking();
+       base.Update();
     }
 
-    private void HandleMovement()
+
+    protected override void HandleMovement()
     {
-        if (_movementBehaviour == null)
-            return;
+      base.HandleMovement();
 
         _movementBehaviour.Target = _artifactTarget;
     }
 
-    private void HandleAttacking()
+    protected override void HandleAttacking()
     {
-        if (_hasAttacked) 
-            return;
-
-        if (_attackBehaviour == null)
-            return;
+        base.HandleAttacking();
 
         if (_artifactTarget == null)
             return;
