@@ -538,6 +538,8 @@ MonoBehaviour:
   _shieldTemplate: {fileID: 7818876783969232098, guid: 8545c27bb13e4794c9d1836833db00ab,
     type: 3}
   _socket: {fileID: 3163939125159593365}
+  _activeTime: 5
+  _inactiveTime: 0
 --- !u!114 &3244545249224235723
 MonoBehaviour:
   m_ObjectHideFlags: 0

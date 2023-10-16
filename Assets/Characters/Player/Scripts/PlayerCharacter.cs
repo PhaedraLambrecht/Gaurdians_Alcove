@@ -14,6 +14,16 @@ public class PlayerCharacter : BasicCharacter
     private InputAction _shootAction;
     private InputAction _shieldAction;
 
+    [SerializeField] private float _delayTime = 0.0f;
+    private float _timeLeft = 0.0f;
+    private bool _DelayStarted = true;
+    public bool DelayStarted
+    {
+        get { return _DelayStarted; }
+        set { _DelayStarted = value; }
+    }
+
+
     protected override void Awake()
     {
         base.Awake();
@@ -50,7 +60,19 @@ public class PlayerCharacter : BasicCharacter
     {
         HandleMovementInput();
         HandleAttackInput();
-        HandleAShieldInput();
+        
+  
+        if(_timeLeft <= 0.0f)
+        {
+            HandleAShieldInput();
+        }
+        else
+        {
+            _timeLeft -= Time.deltaTime;
+        }
+        
+
+
     }
     void HandleMovementInput()
     {
@@ -89,13 +111,11 @@ public class PlayerCharacter : BasicCharacter
             || _shieldAction == null)
             return;
 
-        if (_shieldAction.WasPressedThisFrame())
-            _shieldBehaviour.Attack();
-
-        if(_shieldAction.WasReleasedThisFrame())
-            _shieldBehaviour.Released();
-        
-            
+        if (_shieldAction.IsPressed() && _shieldBehaviour.IsBlocking == false)
+            {
+                _shieldBehaviour.Attack();
+                _timeLeft = _delayTime;
+            }   
     }
 
 }

@@ -2282,6 +2282,11 @@ PrefabInstance:
       propertyPath: _startHealth
       value: 500
       objectReference: {fileID: 0}
+    - target: {fileID: 2508948289300485594, guid: 79c5cf6a8b4f200468cdf72e2b02809a,
+        type: 3}
+      propertyPath: _delayTime
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2570260896282245354, guid: 79c5cf6a8b4f200468cdf72e2b02809a,
         type: 3}
       propertyPath: m_IsTrigger
@@ -2366,6 +2371,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _shoulderObject
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8914770067744951156, guid: 79c5cf6a8b4f200468cdf72e2b02809a,
+        type: 3}
+      propertyPath: _inactiveTime
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

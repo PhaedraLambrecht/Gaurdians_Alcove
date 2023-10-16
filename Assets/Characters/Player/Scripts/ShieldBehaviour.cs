@@ -6,7 +6,10 @@ public class ShieldBehaviour : MonoBehaviour
 {
     [SerializeField] private GameObject _shieldTemplate = null;
     [SerializeField] private Transform _socket = null;
+    [SerializeField] private float _activeTime = 0.0f;
+
     private GameObject _shield = null;
+    private float _timeLeft = 0.0f;
 
     private bool _isBlocking;
     public bool IsBlocking
@@ -15,12 +18,24 @@ public class ShieldBehaviour : MonoBehaviour
         private set { _isBlocking = value; }
     }
 
+
     private void Update()
     {
-        if (_shield != null)
+        if (_shield == null)
             return;
 
         if(_isBlocking)
+        {
+            if(_timeLeft <= 0)
+            {
+                Released();
+            }
+            else
+            {
+                _timeLeft -= Time.deltaTime;
+            }
+
+        }  
     }
 
 
@@ -35,12 +50,12 @@ public class ShieldBehaviour : MonoBehaviour
 
             if (_shield.tag == SHIELD_TAG) _isBlocking = true;
         }
+        _timeLeft = _activeTime;
     }
 
 
     public void Released()
     {
-
         _isBlocking = false;
 
         if (_shield != null)

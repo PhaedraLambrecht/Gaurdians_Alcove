@@ -93,7 +93,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8152381777295202260}
   - component: {fileID: 5483660465169528033}
-  - component: {fileID: 7094622751851559705}
   m_Layer: 6
   m_Name: BasicShield
   m_TagString: Shield
@@ -138,16 +137,3 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 2.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7094622751851559705
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7818876783969232098}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6229b1894e89c9478c777ba97e4f5a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _isActive: 0
