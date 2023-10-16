@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Friendly
   - Enemy
+  - Artifact
+  - Shield
   layers:
   - Default
   - TransparentFX

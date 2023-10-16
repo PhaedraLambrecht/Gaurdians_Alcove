@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -88,10 +89,13 @@ public class PlayerCharacter : BasicCharacter
             || _shieldAction == null)
             return;
 
-        if (_shieldAction.IsPressed())
+        if (_shieldAction.WasPressedThisFrame())
             _shieldBehaviour.Attack();
-        else
+
+        if(_shieldAction.WasReleasedThisFrame())
             _shieldBehaviour.Released();
+        
+            
     }
 
 }

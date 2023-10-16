@@ -5,7 +5,7 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [SerializeField] private int _startHealth = 10;
-    //private BasicShield _shield = null;
+    private ShieldBehaviour _shield = null;
 
     private int _currentHealth = 0;
   
@@ -27,7 +27,9 @@ public class Health : MonoBehaviour
     void Awake()
     {
         _currentHealth = _startHealth;
-        //_shield = GetComponent<PlayerCharacter>().GetComponent<BasicShield>();
+        
+        //if()
+        _shield = GetComponent<ShieldBehaviour>();
     }
 
     private void Start()
@@ -41,8 +43,8 @@ public class Health : MonoBehaviour
 
     public void Damage(int amount)
     {
-       // if (_shield != null && _shield._isActive)
-       //     return;
+        if (_shield != null && _shield.IsBlocking)
+            return;
 
 
         _currentHealth -= amount;

@@ -5,39 +5,47 @@ using UnityEngine;
 public class ShieldBehaviour : MonoBehaviour
 {
     [SerializeField] private GameObject _shieldTemplate = null;
-    [SerializeField] private GameObject _socket = null;
-    private BasicShield _shield = null;
+    [SerializeField] private Transform _socket = null;
+    private GameObject _shield = null;
 
-    private void Awake()
+    private bool _isBlocking;
+    public bool IsBlocking
+    {
+        get { return _isBlocking; }
+        private set { _isBlocking = value; }
+    }
+
+    private void Update()
+    {
+        if (_shield != null)
+            return;
+
+        if(_isBlocking)
+    }
+
+
+
+    const string SHIELD_TAG = "Shield";
+    public void Attack()
     {
         if (_shieldTemplate != null && _socket != null)
         {
-            var shieldObject = Instantiate(_shieldTemplate, _socket.transform, true);
-            shieldObject.transform.localPosition = Vector3.zero;
-            shieldObject.transform.localRotation = Quaternion.identity;
-            _shield = shieldObject.GetComponent<BasicShield>();
-        }
+            _shield = Instantiate(_shieldTemplate, _socket, false);
 
-        _shield.gameObject.SetActive(false);
 
-    }
-
-    public void Attack()
-    {
-        if (_shield != null)
-        {
-            _shield.Fire();
-            _shield.gameObject.SetActive(true);
+            if (_shield.tag == SHIELD_TAG) _isBlocking = true;
         }
     }
 
 
     public void Released()
     {
+
+        _isBlocking = false;
+
         if (_shield != null)
         {
-            _shield.gameObject.SetActive(false);
-
+            Destroy(_shield);
         }
     }
 }
