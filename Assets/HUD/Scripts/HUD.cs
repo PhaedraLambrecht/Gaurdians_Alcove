@@ -6,10 +6,9 @@ public class HUD : MonoBehaviour
 {
     private UIDocument _attachedDocument = null;
     private VisualElement _root = null;
-   // private VisualElement _roottwo = null;
 
     private ProgressBar _playerHealthbar = null;
-    //private ProgressBar _artifactHealthbar = null;
+    private ProgressBar _artifactHealthbar = null;
 
     // Start is called before the first frame update
     void Start()
@@ -23,8 +22,8 @@ public class HUD : MonoBehaviour
 
         if (_root != null)
         {
-            _playerHealthbar = _root.Q<ProgressBar>(); //this will find the first progressbar in the hud, for now as there is only one, that is fine, if we need to be more specific we could pass along a string parameter to define the name of the element.
-            //_artifactHealthbar = _roottwo.Q<ProgressBar>();
+            _playerHealthbar = _root.Q<ProgressBar>("PlayerHealthbar"); //this will find the first progressbar in the hud, for now as there is only one, that is fine, if we need to be more specific we could pass along a string parameter to define the name of the element.
+           _artifactHealthbar = _root.Q<ProgressBar>("ArtifactHealth");
 
             PlayerCharacter player = FindObjectOfType<PlayerCharacter>();
             if (player != null)
@@ -40,19 +39,19 @@ public class HUD : MonoBehaviour
                 }
             }
 
-            //BasicArtifact artifact = FindObjectOfType<BasicArtifact>();
-            //if (artifact != null)
-            //{
+            BasicArtifact artifact = FindObjectOfType<BasicArtifact>();
+            if (artifact != null)
+            {
 
-            //    Health artifactHealth = artifact.GetComponent<Health>();
-            //    if (artifactHealth)
-            //    {
-            //        // initialize
-            //        UpdateArtifactHealth(artifactHealth.StartHealth, artifactHealth.CurrentHealth);
-            //        // hook to monitor changes
-            //        artifactHealth.OnHealthChanged += UpdateArtifactHealth;
-            //    }
-            //}
+                Health artifactHealth = artifact.GetComponent<Health>();
+                if (artifactHealth)
+                {
+                    // initialize
+                    UpdateArtifactHealth(artifactHealth.StartHealth, artifactHealth.CurrentHealth);
+                    // hook to monitor changes
+                    artifactHealth.OnHealthChanged += UpdateArtifactHealth;
+                }
+            }
         }
     }
 
@@ -64,13 +63,13 @@ public class HUD : MonoBehaviour
         _playerHealthbar.title = string.Format("{0}/{1}", currentHealth, startHealth);
     }
 
-    //public void UpdateArtifactHealth(float startHealth, float currentHealth)
-    //{
-    //    if (_artifactHealthbar == null) return;
+    public void UpdateArtifactHealth(float startHealth, float currentHealth)
+    {
+        if (_artifactHealthbar == null) return;
 
-    //    _artifactHealthbar.value = currentHealth / startHealth;
-    //    _artifactHealthbar.title = string.Format("{0}/{1}", currentHealth, startHealth);
-    //}
+        _artifactHealthbar.value = currentHealth / startHealth;
+        _artifactHealthbar.title = string.Format("{0}/{1}", currentHealth, startHealth);
+    }
 }
 
 
