@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,14 +11,19 @@ public class GameOver : MonoBehaviour
 
     private void Update()
     {
-        if (_player == null || _artifact == null)
+        if (_player == null )
+            //|| _artifact == null)
+        {
             TriggerGameOver();
+        }
+        
 
     }
 
     void TriggerGameOver()
     {
-        SceneManager.LoadScene(0);
+        int CurrentScene = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(CurrentScene);
     }
 }
 
