@@ -60,7 +60,7 @@ public class HUD : MonoBehaviour
         if (_playerHealthbar == null) return;
 
         _playerHealthbar.value = currentHealth / startHealth;
-        _playerHealthbar.title = string.Format("{0}/{1}", currentHealth, startHealth);
+        _playerHealthbar.title = string.Format("Player: {0}/{1}", currentHealth, startHealth);
     }
 
     public void UpdateArtifactHealth(float startHealth, float currentHealth)
@@ -68,7 +68,7 @@ public class HUD : MonoBehaviour
         if (_artifactHealthbar == null) return;
 
         _artifactHealthbar.value = currentHealth / startHealth;
-        _artifactHealthbar.title = string.Format("{0}/{1}", currentHealth, startHealth);
+        _artifactHealthbar.title = string.Format(" Artifact: {0}/{1}", currentHealth, startHealth);
     }
 }
 

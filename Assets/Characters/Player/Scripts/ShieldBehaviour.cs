@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ShieldBehaviour : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class ShieldBehaviour : MonoBehaviour
 
     private GameObject _shield = null;
     private float _timeLeft = 0.0f;
+
+    [SerializeField] private UnityEvent _onDeactivateEvent;    
+    [SerializeField] private UnityEvent _onActivateEvent;
 
     private bool _isBlocking;
     public bool IsBlocking
@@ -46,7 +50,7 @@ public class ShieldBehaviour : MonoBehaviour
         if (_shieldTemplate != null && _socket != null)
         {
             _shield = Instantiate(_shieldTemplate, _socket, false);
-
+            _onActivateEvent?.Invoke();
 
             if (_shield.tag == SHIELD_TAG) _isBlocking = true;
         }
@@ -61,6 +65,7 @@ public class ShieldBehaviour : MonoBehaviour
         if (_shield != null)
         {
             Destroy(_shield);
+            _onDeactivateEvent?.Invoke();
         }
     }
 }

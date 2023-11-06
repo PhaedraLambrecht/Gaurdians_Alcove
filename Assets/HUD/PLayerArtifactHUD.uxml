@@ -1,4 +1,4 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:ProgressBar value="22" title="Player" name="PlayerHealthbar" style="align-self: flex-end; width: 20%;" />
-    <ui:ProgressBar value="22" title="Artifact" name="ArtifactHealth" style="align-self: flex-end; width: 20%;" />
+    <ui:ProgressBar value="22" title="Player" name="PlayerHealthbar" style="align-self: flex-end; width: 20%; align-items: stretch; -unity-font: url(&apos;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=2230732570650464555&amp;guid=352d5f48394eaf64a9a813fec967acfc&amp;type=3#NotInter-Regular&apos;);" />
+    <ui:ProgressBar value="22" title="Artifact" name="ArtifactHealth" style="align-self: flex-end; width: 20%; -unity-font: url(&apos;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=2230732570650464555&amp;guid=352d5f48394eaf64a9a813fec967acfc&amp;type=3#NotInter-Regular&apos;); align-items: stretch;" />
 </ui:UXML>

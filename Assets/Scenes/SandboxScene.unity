@@ -974,7 +974,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PanelSettings: {fileID: 11400000, guid: a2b9d5e0d24a3364dadf0e3fcd143c99, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 16faaf936b90b83429efce3df7d9fdb1,
+  sourceAsset: {fileID: 9197481963319205126, guid: c27246249e23b20479d8ee3d1047be0b,
     type: 3}
   m_SortingOrder: 0
 --- !u!114 &614869825
@@ -1559,7 +1559,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.016666668
+  m_VoxelSize: 0.06666667
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 7d8664cd16d8e9648ba357604e119f28, type: 2}
   m_BuildHeightMesh: 0
@@ -2321,6 +2321,7 @@ MonoBehaviour:
   _waveStartFrequency: 15
   _waveEndFrequency: 7
   _waveFrequencyIncrement: 0.5
+  _maxWaves: 1
 --- !u!4 &1918519940
 Transform:
   m_ObjectHideFlags: 0

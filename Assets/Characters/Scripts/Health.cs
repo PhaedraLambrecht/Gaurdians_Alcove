@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Health : MonoBehaviour
 {
@@ -8,7 +9,9 @@ public class Health : MonoBehaviour
     private ShieldBehaviour _shield = null;
 
     private int _currentHealth = 0;
-  
+
+    [SerializeField] private UnityEvent _onHurtEvent;
+
 
     public float StartHealth { get { return _startHealth; } }
     public float CurrentHealth { get { return _currentHealth; } }
@@ -16,10 +19,8 @@ public class Health : MonoBehaviour
     public delegate void HealthChange(float startHealth, float currentHealth);
     public event HealthChange OnHealthChanged;
 
-    [SerializeField]
-    private Color _flickerColor = Color.white;
-    [SerializeField]
-    private float _flickerDuration = 0.1f;
+    [SerializeField] private Color _flickerColor = Color.white;
+    [SerializeField] private float _flickerDuration = 0.1f;
     private Material _attachMaterial;
 
     const string COLOR_PARAMETER = "_BaseColor";
@@ -28,7 +29,6 @@ public class Health : MonoBehaviour
     {
         _currentHealth = _startHealth;
         
-        //if()
         _shield = GetComponent<ShieldBehaviour>();
     }
 
@@ -50,6 +50,7 @@ public class Health : MonoBehaviour
         _currentHealth -= amount;
 
         OnHealthChanged?.Invoke(_startHealth, _currentHealth);
+        _onHurtEvent?.Invoke();
 
         if (_attachMaterial != null)
             StartCoroutine(HandleColorFlicker());
