@@ -256,8 +256,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startHealth: 15
+  _onHurtEvent:
+    m_PersistentCalls:
+      m_Calls: []
   _flickerColor: {r: 1, g: 1, b: 1, a: 1}
   _flickerDuration: 0.1
+  _healthBarPrefab: {fileID: 3287957821398367356, guid: ec20e1c859e611e48bf2eb7d5c60868a,
+    type: 3}
 --- !u!114 &7982052457861096444
 MonoBehaviour:
   m_ObjectHideFlags: 0

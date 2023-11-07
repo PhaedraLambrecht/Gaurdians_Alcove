@@ -60,6 +60,9 @@ public class EnemyKamikazeCharacter : BasicEnemy
 
     void Kill()
     {
+        Health health = this.GetComponent<Health>();
+        health.Kill();
+
         Destroy(gameObject);
     }
 }

@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
@@ -25,6 +27,10 @@ public class Health : MonoBehaviour
 
     const string COLOR_PARAMETER = "_BaseColor";
 
+
+    [SerializeField] private Slider _healthBarPrefab = null;
+    private Slider _healthBar = null;
+
     void Awake()
     {
         _currentHealth = _startHealth;
@@ -39,6 +45,23 @@ public class Health : MonoBehaviour
         {
             _attachMaterial = renderer.material;
         }
+
+        // Instantiating enemy health
+        if (_healthBarPrefab == null)
+            return; 
+
+        _healthBar = Instantiate(_healthBarPrefab, this.transform.position, this.transform.rotation);
+        _healthBar.transform.SetParent(GameObject.Find("Canvas").transform);
+        _healthBar.maxValue = StartHealth;
+        _healthBar.value = StartHealth;
+    }
+
+    private void Update()
+    {
+        if (_healthBar == null)
+            return;
+
+        _healthBar.transform.position = Camera.main.WorldToScreenPoint(this.transform.position + Vector3.up * 2.0f);
     }
 
     public void Damage(int amount)
@@ -46,16 +69,33 @@ public class Health : MonoBehaviour
         if (_shield != null && _shield.IsBlocking)
             return;
 
+         if(_healthBar)
+        {
+            _healthBar.value -= amount;
+            _currentHealth -= amount;
 
-        _currentHealth -= amount;
+            //OnHealthChanged?.Invoke(_startHealth, _currentHealth);
+            //_onHurtEvent?.Invoke();
 
-        OnHealthChanged?.Invoke(_startHealth, _currentHealth);
-        _onHurtEvent?.Invoke();
+            if (_attachMaterial != null)
+                StartCoroutine(HandleColorFlicker());
 
-        if (_attachMaterial != null)
-            StartCoroutine(HandleColorFlicker());
-        if (_currentHealth <= 0)
-            Kill();
+            if (_healthBar.value <= 0)
+                Kill();
+        }
+         else
+        {
+            _currentHealth -= amount;
+
+            OnHealthChanged?.Invoke(_startHealth, _currentHealth);
+            _onHurtEvent?.Invoke();
+
+            if (_attachMaterial != null)
+                StartCoroutine(HandleColorFlicker());
+            if (_currentHealth <= 0)
+                Kill();
+        }
+      
     }
 
     private IEnumerator HandleColorFlicker()
@@ -88,8 +128,12 @@ public class Health : MonoBehaviour
         _attachMaterial.SetColor(COLOR_PARAMETER, startColor);
     }
 
-    void Kill()
+    public void Kill()
     {
+        if (_healthBar)
+        {
+            Destroy(_healthBar.gameObject);
+        }
         Destroy(gameObject);
     }
 
