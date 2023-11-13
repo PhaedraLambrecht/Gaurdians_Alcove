@@ -10,7 +10,7 @@ public class ShieldBehaviour : MonoBehaviour
     [SerializeField] private float _activeTime = 0.0f;
 
     private GameObject _shield = null;
-    private float _timeLeft = 0.0f;
+    private float _timer = 0.0f;
 
     [SerializeField] private UnityEvent _onDeactivateEvent;    
     [SerializeField] private UnityEvent _onActivateEvent;
@@ -30,13 +30,13 @@ public class ShieldBehaviour : MonoBehaviour
 
         if(_isBlocking)
         {
-            if(_timeLeft <= 0)
+            if(_timer <= 0)
             {
-                Released();
+                Deactivate();
             }
             else
             {
-                _timeLeft -= Time.deltaTime;
+                _timer -= Time.deltaTime;
             }
 
         }  
@@ -45,20 +45,25 @@ public class ShieldBehaviour : MonoBehaviour
 
 
     const string SHIELD_TAG = "Shield";
-    public void Attack()
+    public void Activate()
     {
         if (_shieldTemplate != null && _socket != null)
         {
+            // Create the shield and play the sound
             _shield = Instantiate(_shieldTemplate, _socket, false);
             _onActivateEvent?.Invoke();
 
-            if (_shield.tag == SHIELD_TAG) _isBlocking = true;
+            // anything with the shield tag can be a shield (yes even a human)
+            if (_shield.tag == SHIELD_TAG) 
+                _isBlocking = true;
         }
-        _timeLeft = _activeTime;
+
+        // Set the timers new value
+        _timer = _activeTime;
     }
 
 
-    public void Released()
+    public void Deactivate()
     {
         _isBlocking = false;
 

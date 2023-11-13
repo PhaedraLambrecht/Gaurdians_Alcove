@@ -479,7 +479,8 @@ MonoBehaviour:
     type: 3}
   _movementAction: {fileID: -1485194552184658677, guid: 14a79e306a007e84f8fcc452817cf504,
     type: 3}
-  _delayTime: 0
+  _timer: {fileID: 0}
+  _startDelayTime: 10
 --- !u!114 &1041545111055555548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -525,6 +526,7 @@ MonoBehaviour:
         m_CallState: 2
   _flickerColor: {r: 1, g: 1, b: 1, a: 1}
   _flickerDuration: 0.1
+  _healthBarPrefab: {fileID: 0}
 --- !u!114 &5262693964745707948
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -14,20 +14,19 @@ public class BasicShield : MonoBehaviour
     private void Update()
     {
         if (_triggerPulled)
-            FireShield();
+            FireEvent();
 
         //the trigger will release by itself, 
-        //if we still are firing, we will receive new fire input
         _triggerPulled = false;
         _isActive = false;
     }
 
-    private void FireShield()
+    private void FireEvent()
     {
         _onFireEvent?.Invoke();
     }
 
-    public void Fire()
+    public void FireShield()
     {
         _triggerPulled = true;
         _isActive = true;

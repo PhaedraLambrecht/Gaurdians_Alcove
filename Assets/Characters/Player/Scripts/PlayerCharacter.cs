@@ -4,23 +4,28 @@ using UnityEngine.InputSystem;
 
 public class PlayerCharacter : BasicCharacter
 {
-    [SerializeField]
-    private InputActionAsset _inputAsset;
+    [SerializeField] private InputActionAsset _inputAsset;
 
-    [SerializeField]
-    private InputActionReference _movementAction;
 
+    [SerializeField] private InputActionReference _movementAction;
     private InputAction _jumpAction;
     private InputAction _shootAction;
     private InputAction _shieldAction;
 
-    [SerializeField] private float _delayTime = 0.0f;
-    private float _timeLeft = 0.0f;
-    private bool _DelayStarted = true;
+
+    [SerializeField] private CountDownTimer _timer = null;
+    [SerializeField] private float _startDelayTime = 0.0f;
+    private bool _delayStarted = true;
     public bool DelayStarted
     {
-        get { return _DelayStarted; }
-        set { _DelayStarted = value; }
+        get { return _delayStarted; }
+        set { _delayStarted = value; }
+    }
+
+    public float StartDelayTime
+    {
+        get { return _startDelayTime; }
+        private set { _startDelayTime = value; }
     }
 
 
@@ -30,12 +35,13 @@ public class PlayerCharacter : BasicCharacter
 
         if (_inputAsset == null) return;
 
-        //example of searching for the bindings in code, alternatively, they can be hooked in the editor using a InputAcctionReference as shown by _movementAction
+        // Searching for the bindings in code
         _jumpAction = _inputAsset.FindActionMap("Gameplay").FindAction("Jump");
         _shootAction = _inputAsset.FindActionMap("Gameplay").FindAction("Shoot");
         _shieldAction = _inputAsset.FindActionMap("Gameplay").FindAction("Shield");
 
-        //we bind a callback to it instead of continiously monitoring input
+
+        // Bind a callback to it instead of continiously monitoring input
         _jumpAction.performed += HandleJumpInput;
     }
     protected void OnDestroy()
@@ -46,33 +52,30 @@ public class PlayerCharacter : BasicCharacter
 
     private void OnEnable()
     {
-        if (_inputAsset == null) return;
+        if (_inputAsset == null) 
+            return;
 
         _inputAsset.Enable();
     }
     private void OnDisable()
     {
-        if (_inputAsset == null) return;
+        if (_inputAsset == null) 
+            return;
 
         _inputAsset.Disable();
     }
+
+
     private void Update()
     {
         HandleMovementInput();
         HandleAttackInput();
         
   
-        if(_timeLeft <= 0.0f)
+        if( (_timer != null) && (_timer.IsRunning == false) )
         {
             HandleAShieldInput();
         }
-        else
-        {
-            _timeLeft -= Time.deltaTime;
-        }
-        
-
-
     }
     void HandleMovementInput()
     {
@@ -81,7 +84,6 @@ public class PlayerCharacter : BasicCharacter
 
         //movement
         Vector2 movementInput = _movementAction.action.ReadValue<Vector2>().normalized;
-
         Vector3 movement = movementInput.x * Vector3.right + movementInput.y * Vector3.forward;
 
         _movementBehaviour.DesiredMovementDirection = movement;
@@ -98,24 +100,23 @@ public class PlayerCharacter : BasicCharacter
 
     private void HandleAttackInput()
     {
-        if (_attackBehaviour == null
-            || _shootAction == null)
+        if (_attackBehaviour == null || _shootAction == null)
             return;
 
         if (_shootAction.IsPressed())
             _attackBehaviour.Attack();
     }
+
     private void HandleAShieldInput()
     {
-        if (_shieldBehaviour == null
-            || _shieldAction == null)
+        if (_shieldBehaviour == null || _shieldAction == null)
             return;
 
         if (_shieldAction.IsPressed() && _shieldBehaviour.IsBlocking == false)
-            {
-                _shieldBehaviour.Attack();
-                _timeLeft = _delayTime;
-            }   
+        {
+            _shieldBehaviour.Activate();
+            _timer.SetCurrentTime(_startDelayTime);
+        }   
     }
 
 }

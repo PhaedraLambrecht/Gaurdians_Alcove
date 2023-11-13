@@ -22,7 +22,7 @@ public class HUD : MonoBehaviour
 
         if (_root != null)
         {
-            _playerHealthbar = _root.Q<ProgressBar>("PlayerHealthbar"); //this will find the first progressbar in the hud, for now as there is only one, that is fine, if we need to be more specific we could pass along a string parameter to define the name of the element.
+            _playerHealthbar = _root.Q<ProgressBar>("PlayerHealthbar");
            _artifactHealthbar = _root.Q<ProgressBar>("ArtifactHealth");
 
             PlayerCharacter player = FindObjectOfType<PlayerCharacter>();
