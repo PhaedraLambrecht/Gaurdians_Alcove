@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 26267af05a1ded049a3a407406610bb2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -198,6 +198,7 @@ MonoBehaviour:
         m_CallState: 2
   _flickerColor: {r: 1, g: 1, b: 1, a: 1}
   _flickerDuration: 0.1
+  _healthBarPrefab: {fileID: 0}
 --- !u!114 &1019527083133672384
 MonoBehaviour:
   m_ObjectHideFlags: 0

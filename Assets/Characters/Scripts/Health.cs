@@ -61,7 +61,10 @@ public class Health : MonoBehaviour
         if (_healthBar == null)
             return;
 
-        _healthBar.transform.position = Camera.main.WorldToScreenPoint(this.transform.position + Vector3.up * 2.0f);
+        Vector3 screenPos = Camera.main.WorldToScreenPoint(this.transform.position + Vector3.up * 2.0f);
+        Debug.Log(Camera.main.WorldToScreenPoint(this.transform.position + Vector3.up * 2.0f));
+        _healthBar.gameObject.SetActive(screenPos.z >  0);
+        _healthBar.transform.position = screenPos;
     }
 
     public void Damage(int amount)
